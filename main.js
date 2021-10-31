@@ -1,5 +1,5 @@
 // TODO hér vantar að sækja viðeigandi föll úr öðrum modules
-import { createButtons, show } from './lib/ui.js';
+import { createButtons, show, updateResultScreen } from './lib/ui.js';
 
 /** Hámarks fjöldi best-of leikja, ætti að vera jákvæð heiltala stærri en 0 */
 const MAX_BEST_OF = 10;
@@ -68,10 +68,8 @@ function playRound(player) {
  * Fall sem bregst við því þegar smellt er á takka fyrir fjölda umferða
  * @param {Event} e Upplýsingar um atburð
  */
-function round(e) {
-      document
-      .querySelector('.rounds__buttons button')
-      .addEventListener('click', () => show('play'));
+export function round(e) {
+  show('play');
 }
 
 // Takki sem byrjar leik
@@ -84,7 +82,7 @@ document
   .addEventListener('click', () => show('rounds'));
 
 // Búum til takka
-createButtons(MAX_BEST_OF, round());
+createButtons();
 
 // Event listeners fyrir skæri, blað, steinn takka
 // TODO
