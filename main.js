@@ -1,5 +1,6 @@
 // TODO hér vantar að sækja viðeigandi föll úr öðrum modules
 import { show } from './lib/ui.js';
+import { isValidBestOf } from './lib/rock-paper-scissors.js'
 
 /** Hámarks fjöldi best-of leikja, ætti að vera jákvæð heiltala stærri en 0 */
 const MAX_BEST_OF = 10;
