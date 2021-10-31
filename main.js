@@ -1,5 +1,5 @@
 // TODO hér vantar að sækja viðeigandi föll úr öðrum modules
-import { show } from './lib/ui.js';
+import { createButtons, show } from './lib/ui.js';
 
 /** Hámarks fjöldi best-of leikja, ætti að vera jákvæð heiltala stærri en 0 */
 const MAX_BEST_OF = 10;
@@ -73,9 +73,19 @@ function round(e) {
 }
 
 // Takki sem byrjar leik
+function hideall() {
+  show('start')
+}
+
+
+
 document
   .querySelector('.start button')
   .addEventListener('click', () => show('rounds'));
+
+document
+  .querySelector('.rounds__buttons')
+  .addEventListener(createButtons(9))
 
 // Búum til takka
 // createButtons(MAX_BEST_OF, round);
