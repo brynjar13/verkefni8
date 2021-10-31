@@ -69,26 +69,22 @@ function playRound(player) {
  * @param {Event} e Upplýsingar um atburð
  */
 function round(e) {
-  // TODO útfæra
+      document
+      .querySelector('.rounds__buttons button')
+      .addEventListener('click', () => show('play'));
 }
 
 // Takki sem byrjar leik
 function hideall() {
-  show('start')
+  show('start');
 }
-
-
 
 document
   .querySelector('.start button')
   .addEventListener('click', () => show('rounds'));
 
-document
-  .querySelector('.rounds__buttons')
-  .addEventListener(createButtons(9))
-
 // Búum til takka
-// createButtons(MAX_BEST_OF, round);
+createButtons(MAX_BEST_OF, round());
 
 // Event listeners fyrir skæri, blað, steinn takka
 // TODO
