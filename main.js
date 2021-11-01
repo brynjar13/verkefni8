@@ -45,7 +45,9 @@ const games = [];
  * @param {number} player Það sem spilari spilaði
  */
 function playRound(player) {
-  let computer = computerPlay()
+  let computer = computerPlay();
+  
+  let currentRound = 0;
 
   let result = checkGame(player,computer)
 
@@ -60,15 +62,23 @@ function playRound(player) {
     computerWins,
   }); 
 
-  show('result')
   // Uppfærum teljara ef ekki jafntefli, verðum að gera eftir að við setjum titil
   if (result !== 0) {
     currentRound++;
   }
 
+  if (result === 1) {
+    playerWins++;
+  } else if (result === -1) {
+    computerWins++;
+  }
+
   // Ákveðum hvaða takka skuli sýna
 
+
+
   // Sýnum niðurstöðuskjá
+  show('result')
 }
 
 /**
@@ -76,6 +86,7 @@ function playRound(player) {
  * @param {Event} e Upplýsingar um atburð
  */
 export function round(e) {
+  let totalRounds = e.target.textContent;
   show('play');
 }
 
@@ -84,12 +95,12 @@ function hideall() {
   show('start');
 }
 
-document
+const byrja = document
   .querySelector('.start button')
-  .addEventListener('click', () => show('rounds'));
 
+byrja.addEventListener('click', () => show('rounds'));
+byrja.addEventListener('click', () => createButtons(round))
 // Búum til takka
-createButtons();
 
 // Event listeners fyrir skæri, blað, steinn takka
 // TODO
