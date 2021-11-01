@@ -45,20 +45,26 @@ const games = [];
  * @param {number} player Það sem spilari spilaði
  */
 function playRound(player) {
-  let comp = computerPlay()
+  let computer = computerPlay()
+
+  let result = checkGame(player,computer)
 
   // Uppfærum result glugga áður en við sýnum, hér þarf að importa falli
   updateResultScreen({
-    player: player.toString(),
-    computer: comp,
-    result: checkGame(player,comp),
+    player,
+    computer,
+    result,
     currentRound,
-    totalRounds: 
+    totalRounds,
     playerWins,
     computerWins,
   }); 
 
+  show('result')
   // Uppfærum teljara ef ekki jafntefli, verðum að gera eftir að við setjum titil
+  if (result !== 0) {
+    currentRound++;
+  }
 
   // Ákveðum hvaða takka skuli sýna
 
@@ -87,14 +93,15 @@ createButtons();
 
 // Event listeners fyrir skæri, blað, steinn takka
 // TODO
-document.querySelector('button.scissor').addEventListener('click', () => show('result'))
-document.querySelector('button.rock').addEventListener('click', () => show('result'))
-document.querySelector('button.paper').addEventListener('click', () => show('result'))
+const skæri = document.querySelector('button.scissor').addEventListener('click', () => playRound('1'));
+const steinn = document.querySelector('button.rock').addEventListener('click', () => playRound('3'));
+const blað = document.querySelector('button.paper').addEventListener('click', () => playRound('2'));
 
 /**
  * Uppfærir stöðu yfir alla spilaða leiki þegar leik lýkur.
  * Gerir tilbúið þannig að hægt sé að spila annan leik í framhaldinu.
  */
+
 function finishGame() {
   // Bætum við nýjasta leik
 
