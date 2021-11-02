@@ -1,4 +1,4 @@
-show('play');
+show('start');
 // TODO hér vantar að sækja viðeigandi föll úr öðrum modules
 import { el } from './lib/helpers.js';
 import { checkGame, computerPlay } from './lib/rock-paper-scissors.js';
