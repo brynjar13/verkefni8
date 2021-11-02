@@ -10,7 +10,7 @@ const MAX_BEST_OF = 10;
 let totalRounds;
 
 /** Númer umferðar í núverandi umferð */
-let currentRound;
+let currentRound = 1;
 
 /** Sigrar spilara í núverandi umferð */
 let playerWins = 0;
@@ -48,13 +48,10 @@ const games = [];
  */
 function playRound(player) {
   let computer = computerPlay();
-  currentRound = 0;
   let result = checkGame(player,computer);
   if (result === 1) {
-    currentRound++;
     playerWins++;
   } else if (result === -1) {
-    currentRound++;
     computerWins++;
   }
 
@@ -70,7 +67,10 @@ function playRound(player) {
   }); 
 
   // Uppfærum teljara ef ekki jafntefli, verðum að gera eftir að við setjum titil
-
+  if (result !== 0) {
+    currentRound++;
+  }
+  
   // Ákveðum hvaða takka skuli sýna
   if (playerWins/totalRounds > 0.5) {
     games_played++;
@@ -149,6 +149,7 @@ function finishGame() {
   playerWins = 0;
   computerWins = 0;
   totalRounds = 0;
+  currentRound = 1;
   // Byrjum nýjan leik!
   show('rounds')
 }
