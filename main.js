@@ -47,7 +47,7 @@ const games = [];
 function playRound(player) {
   let computer = computerPlay();
   
-  let currentRound = 0;
+  currentRound = 1
 
   let result = checkGame(player,computer)
 
@@ -75,8 +75,6 @@ function playRound(player) {
 
   // Ákveðum hvaða takka skuli sýna
 
-
-
   // Sýnum niðurstöðuskjá
   show('result')
 }
@@ -86,7 +84,7 @@ function playRound(player) {
  * @param {Event} e Upplýsingar um atburð
  */
 export function round(e) {
-  let totalRounds = e.target.textContent;
+  totalRounds = e.target.textContent;
   show('play');
 }
 
