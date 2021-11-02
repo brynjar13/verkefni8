@@ -46,10 +46,13 @@ const games = [];
  */
 function playRound(player) {
   let computer = computerPlay();
-  
-  currentRound = 1
-
-  let result = checkGame(player,computer)
+  currentRound = 1;
+  let result = checkGame(player,computer);
+  if (result === 1) {
+    playerWins++;
+  } else if (result === -1) {
+    computerWins++;
+  }
 
   // Uppfærum result glugga áður en við sýnum, hér þarf að importa falli
   updateResultScreen({
@@ -65,12 +68,6 @@ function playRound(player) {
   // Uppfærum teljara ef ekki jafntefli, verðum að gera eftir að við setjum titil
   if (result !== 0) {
     currentRound++;
-  }
-
-  if (result === 1) {
-    playerWins++;
-  } else if (result === -1) {
-    computerWins++;
   }
 
   // Ákveðum hvaða takka skuli sýna
