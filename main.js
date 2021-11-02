@@ -1,4 +1,5 @@
 // TODO hér vantar að sækja viðeigandi föll úr öðrum modules
+import { el } from './lib/helpers.js';
 import { checkGame, computerPlay } from './lib/rock-paper-scissors.js';
 import { createButtons, show, updateResultScreen } from './lib/ui.js';
 
@@ -124,22 +125,26 @@ const blað = document.querySelector('button.paper').addEventListener('click', (
 function finishGame() {
   // Bætum við nýjasta leik
   let winner = Boolean;
+  let winnerOfgame = '';
   if (playerWins>computerWins) {
     winner = true;
+    winnerOfgame = 'Þú vannst'
   } else {
     winner = false;
+    winnerOfgame = 'Tölva vann'
   }
   games.push({player: playerWins,
               computer: computerWins,
               win: winner});
   // Uppfærum stöðu
   document.querySelector('.games__played').textContent = games_played;
-  document.querySelector('.games__wins').textContent = `${totalWins}`
-  document.querySelector('.games__losses').textContent = `${totalLosses}`
-  document.querySelector('.games__winratio').textContent = `${(totalWins/games_played*100).toFixed(2)}`
-  document.querySelector('.games__lossratio').textContent = `${(totalLosses/games_played*100).toFixed(2)}`
+  document.querySelector('.games__wins').textContent = `${totalWins}`;
+  document.querySelector('.games__losses').textContent = `${totalLosses}`;
+  document.querySelector('.games__winratio').textContent = `${(totalWins/games_played*100).toFixed(2)}`;
+  document.querySelector('.games__lossratio').textContent = `${(totalLosses/games_played*100).toFixed(2)}`;
   // Bætum leik við lista af spiluðum leikjum
-
+  const listi = document.querySelector('.games__list');
+  listi.append(el('ul', `${games.length}. ${winnerOfgame} ${playerWins} - ${computerWins}`));
   // Núllstillum breytur
   playerWins = 0;
   computerWins = 0;
