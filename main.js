@@ -160,3 +160,4 @@ const next = document.querySelector('button.nextRound');
 done.addEventListener('click', finishGame);
 next.addEventListener('click', () => show('play'));
 // TODO takki sem fer með í næstu umferð
+hideall();
