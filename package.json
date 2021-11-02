@@ -4,6 +4,7 @@
   "main": "scripts.js",
   "scripts": {
     "dev": "browser-sync start --server --files main.js **/*.js styles.css index.html",
+    "copy:css":"cpy ./*css ./build/",
     "copy:html": "cpy ./*.html ./build/",
     "copy:js": "cpy ./*.js ./build/",
     "copy:lib": "cpy ./lib/*.js ./build/lib",

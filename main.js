@@ -1,3 +1,4 @@
+show('play');
 // TODO hér vantar að sækja viðeigandi föll úr öðrum modules
 import { el } from './lib/helpers.js';
 import { checkGame, computerPlay } from './lib/rock-paper-scissors.js';
@@ -100,9 +101,6 @@ export function round(e) {
 }
 
 // Takki sem byrjar leik
-function hideall() {
-  show('start');
-}
 
 const byrja = document
   .querySelector('.start button')
@@ -160,4 +158,3 @@ const next = document.querySelector('button.nextRound');
 done.addEventListener('click', finishGame);
 next.addEventListener('click', () => show('play'));
 // TODO takki sem fer með í næstu umferð
-hideall();
