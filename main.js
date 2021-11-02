@@ -45,6 +45,7 @@ const games = [];
  * @param {number} player Það sem spilari spilaði
  */
 function playRound(player) {
+  next.addEventListener('click', () => show('play'))
   let computer = computerPlay();
   currentRound = 1;
   let result = checkGame(player,computer);
@@ -71,7 +72,11 @@ function playRound(player) {
   }
 
   // Ákveðum hvaða takka skuli sýna
-
+  if (playerWins/totalRounds > 0.5 || computerWins/totalRounds > 0.5 ) {
+    next.classList.add('hidden');
+  } else {
+    done.classList.add('hidden');
+  }
   // Sýnum niðurstöðuskjá
   show('result')
 }
@@ -110,16 +115,28 @@ const blað = document.querySelector('button.paper').addEventListener('click', (
 
 function finishGame() {
   // Bætum við nýjasta leik
-
+  let winner = Boolean;
+  if (playerWins>computerWins) {
+    winner = true;
+  } else {
+    winner = false;
+  }
+  games.push({player: playerWins,
+              computer: computerWins,
+              win: winner})
   // Uppfærum stöðu
-
+  
   // Bætum leik við lista af spiluðum leikjum
 
   // Núllstillum breytur
-
+  playerWins = 0;
+  computerWins = 0;
+  totalRounds = 0;
   // Byrjum nýjan leik!
+  show('rounds')
 }
 
 // Næsta umferð og ljúka leik takkar
-document.querySelector('button.finishGame').addEventListener('click', finishGame);
+const done = document.querySelector('button.finishGame').addEventListener('click', finishGame);
+const next = document.querySelector('button.nextRound');
 // TODO takki sem fer með í næstu umferð
