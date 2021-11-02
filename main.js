@@ -16,12 +16,13 @@ let playerWins = 0;
 
 /** Töp spilara í núverandi umferð */
 let computerWins = 0;
-
+let games_played = 0;
 /**
  * Fjöldi sigra spilara í öllum leikjum. Gætum reiknað útfrá `games` en til
  * einföldunar höldum við utan um sérstaklega.
  */
 let totalWins = 0;
+let totalLosses = 0;
 
 /**
  * Utanumhald um alla spilaða leiki, hver leikur er geymdur á forminu:
@@ -45,13 +46,14 @@ const games = [];
  * @param {number} player Það sem spilari spilaði
  */
 function playRound(player) {
-  next.addEventListener('click', () => show('play'))
   let computer = computerPlay();
-  currentRound = 1;
+  currentRound = 0;
   let result = checkGame(player,computer);
   if (result === 1) {
+    currentRound++;
     playerWins++;
   } else if (result === -1) {
+    currentRound++;
     computerWins++;
   }
 
@@ -67,15 +69,21 @@ function playRound(player) {
   }); 
 
   // Uppfærum teljara ef ekki jafntefli, verðum að gera eftir að við setjum titil
-  if (result !== 0) {
-    currentRound++;
-  }
 
   // Ákveðum hvaða takka skuli sýna
-  if (playerWins/totalRounds > 0.5 || computerWins/totalRounds > 0.5 ) {
+  if (playerWins/totalRounds > 0.5) {
+    games_played++;
+    totalWins++;
     next.classList.add('hidden');
+    done.classList.remove('hidden');
+  } else if (computerWins/totalRounds > 0.5 ) {
+    games_played++;
+    totalLosses++;
+    next.classList.add('hidden');
+    done.classList.remove('hidden');
   } else {
     done.classList.add('hidden');
+    next.classList.remove('hidden')
   }
   // Sýnum niðurstöðuskjá
   show('result')
@@ -123,9 +131,13 @@ function finishGame() {
   }
   games.push({player: playerWins,
               computer: computerWins,
-              win: winner})
+              win: winner});
   // Uppfærum stöðu
-  
+  document.querySelector('.games__played').textContent = games_played;
+  document.querySelector('.games__wins').textContent = `${totalWins}`
+  document.querySelector('.games__losses').textContent = `${totalLosses}`
+  document.querySelector('.games__winratio').textContent = `${(totalWins/games_played*100).toFixed(2)}`
+  document.querySelector('.games__lossratio').textContent = `${(totalLosses/games_played*100).toFixed(2)}`
   // Bætum leik við lista af spiluðum leikjum
 
   // Núllstillum breytur
@@ -137,6 +149,8 @@ function finishGame() {
 }
 
 // Næsta umferð og ljúka leik takkar
-const done = document.querySelector('button.finishGame').addEventListener('click', finishGame);
+const done = document.querySelector('button.finishGame');
 const next = document.querySelector('button.nextRound');
+done.addEventListener('click', finishGame);
+next.addEventListener('click', () => show('play'));
 // TODO takki sem fer með í næstu umferð
